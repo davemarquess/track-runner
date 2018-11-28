@@ -1,0 +1,41 @@
+#root {
+  margin: auto;
+  width: 40%;
+  height: 80%;
+  /* color: white; */
+  /* background-color: black */
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 667px) {
+  #input {
+    width: 80%;
+    padding-right: 10px;
+    margin-right: 4px;
+    border: 1px solid black;
+  }
+
+  #submitButton {
+    padding-top: 10px;
+  }
+
+  #header {
+    width: 80%;
+    margin: auto;
+    text-align: center; 
+  }
+}
+
+@media only screen 
+and (min-device-width : 668px) 
+and (max-device-width : 2480px) {
+  #input {
+    width: 40%;
+    padding-right: 15px;
+    margin-right: 6px;
+    border: 1px solid black;
+  }
+}
+
+
