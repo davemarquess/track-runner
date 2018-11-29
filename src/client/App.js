@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import Form from './components/Form';
 import List from './components/List';
 import Reset from './components/reset';
+import ProgressBar from './components/ProgressBar';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trackArr: ['145bpm', '808', 'Omnisphere2'],
+      trackArr: [],
       currentText: '',
       isAuthenticated: true,
       questionIndex: 0,
@@ -43,8 +44,7 @@ class App extends Component {
       'Other Notes'
     ];
     const trackArrCopy = this.state.trackArr.slice();
-    trackArrCopy.push(topics[this.state.questionIndex] + ': ' + this.state.currentText);
-
+    trackArrCopy.push(topics[this.state.questionIndex] + " -  " + this.state.currentText);
     this.setState((prevState) => {
       if (prevState.responseIndex <= 9) {
         prevState.resultObj[topics[this.state.questionIndex]] = this.state.currentText;
@@ -83,7 +83,7 @@ class App extends Component {
       'What plugins would you like to use for Mixing?',
       'What plugins will you be using for Mastering?',
       'Lastly, please add any final notes to include in your production!',
-      'Thank you, enjoy your production!  Press \'Save\' to save your template in database!'
+      'Thank you, enjoy your production!  Click \'Save\' to save your template in the database!'
     ];
 
     this.setState((prevState) => {
@@ -99,7 +99,7 @@ class App extends Component {
   handleSave() {
     const resultObjCopy = this.state.resultObj;
     const { Name, BPM, Genres, Bass, Drums, Synths } = resultObjCopy;
-
+    this.handleReset();
     fetch('http://localhost:3000/track', {
       method: 'POST',
       headers: {
@@ -139,6 +139,9 @@ class App extends Component {
         <Reset
           handleReset={this.handleReset}
           handleSave={this.handleSave}
+        />
+        <ProgressBar
+          questionIndex={this.state.questionIndex}
         />
       </div>
     )

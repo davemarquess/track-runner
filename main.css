@@ -14,7 +14,12 @@ body {
 }
 
 ul {
-  margin-left: -20px;
+  margin-left: -36px;
+}
+
+li {
+  list-style-type: none;
+  padding-bottom: 2px;
 }
 
 button {
