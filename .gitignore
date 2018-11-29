@@ -4,3 +4,4 @@ dist
 .env
 .cache
 .DS_Store
+src/client/components/Question.js
