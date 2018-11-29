@@ -27,6 +27,10 @@ li {
   padding-bottom: 2px;
 }
 
+li:hover {
+  cursor: pointer;
+}
+
 button {
   color: white;
   cursor: pointer;

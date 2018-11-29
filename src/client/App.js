@@ -21,7 +21,23 @@ class App extends Component {
     this.handleReset = this.handleReset.bind(this);
     this.handleQuestion = this.handleQuestion.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
   }
+
+  handleDeleteOption(optionToRemove) {
+    let optionToRemoveOnObj = optionToRemove.match(/[^-\s]+/);
+
+    // console.log(optionToRemoveOnObj);
+    let resultObjCopy = this.state.resultObj;
+    delete resultObjCopy[optionToRemoveOnObj];
+    console.log('resultObjCopy: ', resultObjCopy);
+    this.setState((prevState) => ({
+      trackArr: prevState.trackArr.filter((option) => optionToRemove !== option),
+      // resultObj: delete resultObj[optionToRemove]
+      resultObj: resultObjCopy
+    }));
+    // console.log(trackArr);
+  };
 
   handleChange(e) {
     this.setState({
@@ -48,13 +64,14 @@ class App extends Component {
     this.setState((prevState) => {
       if (prevState.responseIndex <= 9) {
         prevState.resultObj[topics[this.state.questionIndex]] = this.state.currentText;
+        console.log('resultObj: ', this.state.resultObj)
         return {
           trackArr: trackArrCopy,
           currentText: '',
           resultObj: prevState.resultObj
         }
       } else {
-        console.log('resultObj: ', this.state.resultObj)
+        // console.log('resultObj: ', this.state.resultObj)
         return {
           trackArr: prevState.trackArr,
           currentText: ''
@@ -135,6 +152,8 @@ class App extends Component {
         <List
           trackArr={this.state.trackArr}
           isAuthenticated={this.state.isAuthenticated}
+          handleDeleteOption={this.handleDeleteOption}
+          resultObj={this.state.resultObj}
         />
         <Reset
           handleReset={this.handleReset}

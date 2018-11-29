@@ -8,7 +8,7 @@ const ProgressBar = (props) => {
     <div>
       <br></br>
       {questionIndex > 0 &&
-        <div>
+        <div id="progressBar">
           <Line
             percent={(questionIndex / 9) * 100}
             strokeWidth="8"
