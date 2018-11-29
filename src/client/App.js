@@ -26,17 +26,12 @@ class App extends Component {
 
   handleDeleteOption(optionToRemove) {
     let optionToRemoveOnObj = optionToRemove.match(/[^-\s]+/);
-
-    // console.log(optionToRemoveOnObj);
     let resultObjCopy = this.state.resultObj;
     delete resultObjCopy[optionToRemoveOnObj];
-    console.log('resultObjCopy: ', resultObjCopy);
     this.setState((prevState) => ({
       trackArr: prevState.trackArr.filter((option) => optionToRemove !== option),
-      // resultObj: delete resultObj[optionToRemove]
       resultObj: resultObjCopy
     }));
-    // console.log(trackArr);
   };
 
   handleChange(e) {
@@ -71,7 +66,6 @@ class App extends Component {
           resultObj: prevState.resultObj
         }
       } else {
-        // console.log('resultObj: ', this.state.resultObj)
         return {
           trackArr: prevState.trackArr,
           currentText: ''
@@ -140,8 +134,7 @@ class App extends Component {
 
     return (
       <div>
-        <h1 id='header'>⚡️ 👟 🎸 🏃🏽 Track  Runner <br></br> 🏃🏽 🎸 👟 ⚡️</h1>
-
+        <h1 id='header'>⚡️ 👟 🎸 Track  Runner <br></br> 🎸 👟 ⚡️</h1>
         <Form
           handleQuestion={this.handleQuestion}
           question={this.state.question}
