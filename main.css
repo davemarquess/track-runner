@@ -83,3 +83,7 @@ and (max-device-width : 2480px) {
     border: 1px solid black;
   }
 }
+
+textarea, select, button { outline: none; }
+
+input { outline-color: #7989c2}
