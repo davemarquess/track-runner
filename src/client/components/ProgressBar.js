@@ -10,9 +10,6 @@ const ProgressBar = (props) => {
       {questionIndex > 0 &&
         <div>
           <Line
-            transitionName="fade"
-            transitionEnterTimeout={1000}
-            transitionLeaveTimeout={300}
             percent={(questionIndex / 9) * 100}
             strokeWidth="8"
             strokeColor="#4F1B7C"
