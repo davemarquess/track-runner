@@ -13,6 +13,10 @@ body {
     );
 }
 
+ul {
+  margin-left: -20px;
+}
+
 button {
   color: white;
   cursor: pointer;
@@ -28,7 +32,7 @@ button:disabled {
 #root {
   margin: auto;
   padding-top: 10px;
-  width: 40%;
+  width: 60%;
   height: 80%;
   color: white;
   /* background-color: black */

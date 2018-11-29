@@ -123,7 +123,7 @@ class App extends Component {
 
     return (
       <div>
-        <h1 id='header'>⚡️ 👟 🎸 Track Runner 🎸 👟 ⚡️</h1>
+        <h1 id='header'>⚡️ 👟 🎸 Track Runner <br></br>🎸 👟 ⚡️</h1>
 
         <Form
           handleQuestion={this.handleQuestion}
