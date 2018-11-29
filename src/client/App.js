@@ -12,12 +12,14 @@ class App extends Component {
       isAuthenticated: true,
       questionIndex: 0,
       question: 'What is your name?',
-      responseIndex: 0
+      responseIndex: 0,
+      resultObj: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.handleQuestion = this.handleQuestion.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   handleChange(e) {
@@ -30,26 +32,29 @@ class App extends Component {
     e.preventDefault(); // prevents it from reloading the page
     this.handleQuestion();
     const topics = [
-      'Name: ',
-      'BPM: ',
-      'Genres: ',
-      'Bass: ',
-      'Drums: ',
-      'Synths: ',
-      'Mixing Plugins: ',
-      'Mastering Plugins: ',
-      'Other Notes: '
+      'Name',
+      'BPM',
+      'Genres',
+      'Bass',
+      'Drums',
+      'Synths',
+      'Mixing Plugins',
+      'Mastering Plugins',
+      'Other Notes'
     ];
     const trackArrCopy = this.state.trackArr.slice();
-    trackArrCopy.push(topics[this.state.questionIndex] + this.state.currentText);
+    trackArrCopy.push(topics[this.state.questionIndex] + ': ' + this.state.currentText);
 
     this.setState((prevState) => {
       if (prevState.responseIndex <= 9) {
+        prevState.resultObj[topics[this.state.questionIndex]] = this.state.currentText;
         return {
           trackArr: trackArrCopy,
           currentText: '',
+          resultObj: prevState.resultObj
         }
       } else {
+        console.log('resultObj: ', this.state.resultObj)
         return {
           trackArr: prevState.trackArr,
           currentText: ''
@@ -92,27 +97,26 @@ class App extends Component {
   }
 
   handleSave() {
-    const countCopy = this.state.count;
-    fetch('http://localhost:3000/counter', {
+    const resultObjCopy = this.state.resultObj;
+    const { Name, BPM, Genres, Bass, Drums, Synths } = resultObjCopy;
+
+    fetch('http://localhost:3000/track', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       },
       body: JSON.stringify({
-        count: countCopy
+        Name,
+        BPM,
+        Genres,
+        Bass,
+        Drums,
+        Synths
       })
     })
       .then((data) => {
         return data.json();
       })
-      .then((newCount) => {
-        // console.log(newCount);
-        const arrCopy = this.state.arr.slice();
-        arrCopy.push(newCount.count);
-        this.setState({
-          arr: arrCopy
-        });
-      });
   }
 
   render() {
