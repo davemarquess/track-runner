@@ -4,7 +4,10 @@ const Form = (props) => {
   const { handleChange, handleSubmit, currentText, question, handleQuestion } = props;
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
         <p>{question}</p>
         <input type="text" onChange={handleChange} id='input' />
 

@@ -83,7 +83,7 @@ class App extends Component {
       'What plugins would you like to use for Mixing?',
       'What plugins will you be using for Mastering?',
       'Lastly, please add any final notes to include in your production!',
-      'Thank you, enjoy your production!  Click \'Save\' to save your template in the database!'
+      'Thank you, enjoy your production!  Click \'Save\' to store your template in the database!'
     ];
 
     this.setState((prevState) => {
