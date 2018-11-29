@@ -1,8 +1,36 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: black;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  background-image:
+    radial-gradient(
+      #333745,
+      black
+    );
+}
+
+button {
+  color: white;
+  cursor: pointer;
+  border: 1px solid rgb(101, 97, 97);
+  background-color: #333745;
+  margin: 2px;
+}
+
+button:disabled {
+  cursor: default;
+}
+
 #root {
   margin: auto;
+  padding-top: 10px;
   width: 40%;
   height: 80%;
-  /* color: white; */
+  color: white;
   /* background-color: black */
 }
 
@@ -17,13 +45,13 @@ and (max-device-width : 667px) {
   }
 
   #submitButton {
-    padding-top: 10px;
+    margin-top: 10px;
   }
 
   #header {
     width: 80%;
     margin: auto;
-    text-align: center; 
+    text-align: center;
   }
 }
 
@@ -37,5 +65,3 @@ and (max-device-width : 2480px) {
     border: 1px solid black;
   }
 }
-
-

@@ -11,7 +11,7 @@ class App extends Component {
       currentText: '',
       isAuthenticated: true,
       questionIndex: 0,
-      question: 'What is your name?',
+      question: 'What is your track name?',
       responseIndex: 0,
       resultObj: {}
     };
@@ -68,7 +68,7 @@ class App extends Component {
     this.setState({
       trackArr: [],
       questionIndex: 0,
-      question: 'What is your name?',
+      question: 'What is your track name?',
       responseIndex: 0
     });
   }

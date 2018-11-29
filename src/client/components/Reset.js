@@ -3,8 +3,8 @@ import React from 'react';
 const Reset = (props) => {
   return (
     <div>
-      <button onClick={props.handleReset}>Reset Track</button>
-      <button onClick={props.handleSave}>Save</button>
+      <button id="saveButton1" onClick={props.handleReset}>Reset Track</button>
+      <button id="saveButton2" onClick={props.handleSave}>Save</button>
     </div>
   );
 };
