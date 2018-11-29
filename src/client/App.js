@@ -11,7 +11,8 @@ class App extends Component {
       currentText: '',
       isAuthenticated: true,
       questionIndex: 0,
-      question: 'Select a bpm (beats per minute)'
+      question: 'What is your name?',
+      responseIndex: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,11 +29,32 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault(); // prevents it from reloading the page
     this.handleQuestion();
+    const topics = [
+      'Name: ',
+      'BPM: ',
+      'Genres: ',
+      'Bass: ',
+      'Drums: ',
+      'Synths: ',
+      'Mixing Plugins: ',
+      'Mastering Plugins: ',
+      'Other Notes: '
+    ];
     const trackArrCopy = this.state.trackArr.slice();
-    trackArrCopy.push(this.state.currentText);
-    this.setState({
-      trackArr: trackArrCopy,
-      currentText: '',
+    trackArrCopy.push(topics[this.state.questionIndex] + this.state.currentText);
+
+    this.setState((prevState) => {
+      if (prevState.responseIndex <= 9) {
+        return {
+          trackArr: trackArrCopy,
+          currentText: '',
+        }
+      } else {
+        return {
+          trackArr: prevState.trackArr,
+          currentText: ''
+        }
+      }
     });
     e.target.reset();
   }
@@ -41,33 +63,57 @@ class App extends Component {
     this.setState({
       trackArr: [],
       questionIndex: 0,
-      question: 'Select a bpm (beats per minute)'
+      question: 'What is your name?',
+      responseIndex: 0
     });
-    console.log(this.state)
   }
 
   handleQuestion() {
     const questionArr = [
+      'Select a bpm (beats per minute)',
       'What genres would you like to create?',
       'Choose a bass instrument',
       'Select a drum rack',
       'What synths would you like to use?',
       'What plugins would you like to use for Mixing?',
-      'Lastly, what plugins will you be using for Mastering?'
+      'What plugins will you be using for Mastering?',
+      'Lastly, please add any final notes to include in your production!',
+      'Thank you, enjoy your production!  Press \'Save\' to save your template in database!'
     ];
 
     this.setState((prevState) => {
+      if (prevState.questionIndex === 9) prevState.questionIndex -= 1;
       return {
         questionIndex: prevState.questionIndex + 1,
-        question: questionArr[this.state.questionIndex]
+        question: questionArr[this.state.questionIndex],
+        responseIndex: prevState.responseIndex + 1
       };
     });
-
   }
 
-  // handleSave() {
-
-  // }
+  handleSave() {
+    const countCopy = this.state.count;
+    fetch('http://localhost:3000/counter', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify({
+        count: countCopy
+      })
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((newCount) => {
+        // console.log(newCount);
+        const arrCopy = this.state.arr.slice();
+        arrCopy.push(newCount.count);
+        this.setState({
+          arr: arrCopy
+        });
+      });
+  }
 
   render() {
 
@@ -86,7 +132,10 @@ class App extends Component {
           trackArr={this.state.trackArr}
           isAuthenticated={this.state.isAuthenticated}
         />
-        <Reset handleReset={this.handleReset} />
+        <Reset
+          handleReset={this.handleReset}
+          handleSave={this.handleSave}
+        />
       </div>
     )
   }
