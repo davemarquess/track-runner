@@ -15,6 +15,9 @@ class App extends Component {
       question: 'What is the name of your track?',
       responseIndex: 0,
       resultObj: {},
+      fetchedTracks: [],
+      fetchedTracksDisplay: [],
+      areTracksFetched: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,7 +84,9 @@ class App extends Component {
       trackArr: [],
       questionIndex: 0,
       question: 'What is the name of your track?',
-      responseIndex: 0
+      responseIndex: 0,
+      fetchedTracksDisplay: [],
+      areTracksFetched: false
     });
   }
 
@@ -129,7 +134,6 @@ class App extends Component {
       .then((data) => {
         return data.json();
       })
-      .then()
   }
 
   handleRetrieve() {
@@ -139,13 +143,25 @@ class App extends Component {
       .then((data) => {
         return data.json();
       }).then((objects) => {
-        console.log(objects);
-
+        this.setState({
+          fetchedTracks: objects
+        })
       })
+    const resultArr = [];
+    let fetchedTracksCopy = this.state.fetchedTracks;
+    let i = 0;
+    fetchedTracksCopy.forEach(trackObj => {
+      for (let key in trackObj) {
+        resultArr.push(<p key={i++}>{key}: {trackObj[key]}</p>);
+      }
+    });
+    this.setState({
+      fetchedTracksDisplay: resultArr,
+      areTracksFetched: true
+    })
   }
 
   render() {
-
     return (
       <div>
         <h1 id='header'>⚡️ 👟 🎸 Track  Runner <br></br> 🎸 👟 ⚡️</h1>
@@ -166,6 +182,8 @@ class App extends Component {
           handleReset={this.handleReset}
           handleSave={this.handleSave}
           handleRetrieve={this.handleRetrieve}
+          fetchedTracksDisplay={this.state.fetchedTracksDisplay}
+          areTracksFetched={this.state.areTracksFetched}
         />
         <ProgressBar
           questionIndex={this.state.questionIndex}
