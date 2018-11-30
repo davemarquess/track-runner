@@ -23,6 +23,21 @@ mongoose.connect(process.env.MONGO_URI, {
   else console.log('Connected to database!');
 });
 
+// Get a track from the database
+// localhost://3000/track/"name"
+// trackRouter.get('/:name', studentController.getStudent);
+
+app.get('/track/', (req, res) => {
+  Track.find(req.body).then((data))
+  let name = req.params.name;
+  if (name) {
+    res.send(name);
+  }
+  else {
+    res.sendStatus(418);
+  }
+});
+
 // ROUTES 
 app.post('/track', (req, res) => {
   Track.create(req.body).then((data) => {

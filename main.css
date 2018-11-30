@@ -13,6 +13,12 @@ body {
     );
 }
 
+img {
+  height: 25px;
+  width: 25px;
+  color: white;
+}
+
 h1 {
   text-align: center;
   margin: auto;

@@ -130,6 +130,26 @@ class App extends Component {
       })
   }
 
+  handleRetrieve() {
+    fetch('http://localhost:3000/track', {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify({
+        Name,
+        BPM,
+        Genres,
+        Bass,
+        Drums,
+        Synths
+      })
+    })
+      .then((data) => {
+        return data.json();
+      })
+  }
+
   render() {
 
     return (
