@@ -14,7 +14,7 @@ class App extends Component {
       questionIndex: 0,
       question: 'What is the name of your track?',
       responseIndex: 0,
-      resultObj: {}
+      resultObj: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +22,7 @@ class App extends Component {
     this.handleQuestion = this.handleQuestion.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
+    this.handleRetrieve = this.handleRetrieve.bind(this);
   }
 
   handleDeleteOption(optionToRemove) {
@@ -128,25 +129,18 @@ class App extends Component {
       .then((data) => {
         return data.json();
       })
+      .then()
   }
 
   handleRetrieve() {
     fetch('http://localhost:3000/track', {
       method: 'GET',
-      headers: {
-        "Content-Type": "application/json; charset=utf-8"
-      },
-      body: JSON.stringify({
-        Name,
-        BPM,
-        Genres,
-        Bass,
-        Drums,
-        Synths
-      })
     })
       .then((data) => {
         return data.json();
+      }).then((objects) => {
+        console.log(objects);
+
       })
   }
 
@@ -171,6 +165,7 @@ class App extends Component {
         <Reset
           handleReset={this.handleReset}
           handleSave={this.handleSave}
+          handleRetrieve={this.handleRetrieve}
         />
         <ProgressBar
           questionIndex={this.state.questionIndex}

@@ -28,14 +28,10 @@ mongoose.connect(process.env.MONGO_URI, {
 // trackRouter.get('/:name', studentController.getStudent);
 
 app.get('/track/', (req, res) => {
-  Track.find(req.body).then((data))
-  let name = req.params.name;
-  if (name) {
-    res.send(name);
-  }
-  else {
-    res.sendStatus(418);
-  }
+  Track.find((err, tracks) => {
+    if (err) return res.status(500).send(err);
+    return res.status(200).send(tracks);
+  });
 });
 
 // ROUTES 
