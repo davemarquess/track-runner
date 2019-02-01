@@ -26,6 +26,11 @@ class App extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.handleRetrieve = this.handleRetrieve.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+
   }
 
   handleDeleteOption(optionToRemove) {

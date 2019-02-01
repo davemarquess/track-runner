@@ -7,6 +7,7 @@ const Reset = (props) => {
       <button id="saveButton2" onClick={props.handleSave}>Save</button>
       <button onClick={props.handleRetrieve}>Explore</button>
       {props.areTracksFetched && props.fetchedTracksDisplay}
+      <button onClick={props.handleDelete}>Delete</button>
     </div>
   );
 };
